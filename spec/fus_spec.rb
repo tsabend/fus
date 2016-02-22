@@ -1,9 +1,12 @@
 require 'spec_helper'
 
 describe Fus::Finder do
+  before :each do
+    @fixtures_path = File.expand_path(File.join(__FILE__, '../fixtures'))
+  end
   describe "swift_classes" do
     it "returns all of the classes in all the swift paths" do
-      finder = Fus::Finder.new("./fixtures")
+      finder = Fus::Finder.new(@fixtures_path)
       expect(finder.swift_classes).to include("Foo", "ClassVar", "SuperFoo", "NoSpaceSuperFoo", "UnusedClass", "ObjCH", "ObjCM")
       expect(finder.swift_classes.count).to eq(7)
     end
@@ -11,7 +14,7 @@ describe Fus::Finder do
   
   describe "unused_classes" do
     it "returns classes that are never used" do
-      finder = Fus::Finder.new("./fixtures")
+      finder = Fus::Finder.new(@fixtures_path)
       expect(finder.unused_classes).to include("UnusedClass")
       expect(finder.unused_classes.count).to eq(1)
     end
