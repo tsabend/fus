@@ -75,7 +75,6 @@ module Fus
     end
 
     def self.class_is_used_in_obj_c_text(classname, text)
-      # return false unless path.scan(/#{classname}/).empty?
       !text.scan(/#{classname}/).flatten.empty?
     end
   
