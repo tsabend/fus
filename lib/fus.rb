@@ -17,6 +17,10 @@ module Fus
       @obj_c_paths ||= (Dir.glob("#{path}/**/*.m") + Dir.glob("#{path}/**/*.h"))
       .select {|path| path.scan(/-Swift.h/).empty? }
     end
+    
+    def storyboard_xib_paths
+      @storyboard_xib_paths ||= (Dir.glob("#{path}/**/*.xib") + Dir.glob("#{path}/**/*.storyboard"))
+    end
 
     def swift_classes
       @swift_classes ||= swift_paths.reduce([]) do |memo, path|
@@ -28,8 +32,9 @@ module Fus
     def unused_classes
       @unused_classes ||= swift_classes.reject do |classname|
         self.class.class_is_spec(classname) ||
-        class_is_used_in_swift(classname, swift_paths) ||
-        class_is_used_in_objective_c(classname, obj_c_paths)
+        class_is_used_in_swift(classname) ||
+        class_is_used_in_storyboards(classname) ||
+        class_is_used_in_objective_c(classname)
       end
     end
 
@@ -39,7 +44,7 @@ module Fus
       swift_text.scan(/class\s+([^func][^var][a-zA-Z_]+)\s*:?.*\{/).flatten
     end
 
-    def class_is_used_in_swift(classname, paths)
+    def class_is_used_in_swift(classname, paths=swift_paths)
       paths.each do |path|
         next if self.class.path_matches_classname(classname, path)
         return true if self.class.swift_class_is_used_in_text(classname, File.open(path).read)
@@ -47,9 +52,16 @@ module Fus
       return false
     end
 
-    def class_is_used_in_objective_c(classname, paths)
+    def class_is_used_in_objective_c(classname, paths=obj_c_paths)
       paths.each do |path|
-        return true if self.class.obj_c_class_is_used_in_text(classname, File.open(path).read)
+        return true if self.class.class_is_used_in_obj_c_text(classname, File.open(path).read)
+      end
+      return false
+    end
+
+    def class_is_used_in_storyboards(classname, paths=storyboard_xib_paths)
+      paths.each do |path|
+        return true if self.class.class_is_used_in_xml(classname, File.open(path).read)
       end
       return false
     end
@@ -62,11 +74,15 @@ module Fus
       !path.scan(/#{classname}\b/).empty?
     end
 
-    def self.obj_c_class_is_used_in_text(classname, text)
+    def self.class_is_used_in_obj_c_text(classname, text)
       # return false unless path.scan(/#{classname}/).empty?
       !text.scan(/#{classname}/).flatten.empty?
     end
-
+  
+    def self.class_is_used_in_xml(classname, xml)
+      xml.include?("customClass=\"#{classname}\"")
+    end
+    
     def self.class_is_spec(classname)
       !!classname.match(/Spec$/)
     end

@@ -7,8 +7,8 @@ describe Fus::Finder do
   describe "swift_classes" do
     it "returns all of the classes in all the swift paths" do
       finder = Fus::Finder.new(@fixtures_path)
-      expect(finder.swift_classes).to include("Foo", "ClassVar", "SuperFoo", "NoSpaceSuperFoo", "UnusedClass", "ObjCH", "ObjCM", "FooSpec")
-      expect(finder.swift_classes.count).to eq(8)
+      expect(finder.swift_classes).to include("Foo", "ClassVar", "SuperFoo", "NoSpaceSuperFoo", "UnusedClass", "ObjCH", "ObjCM", "FooSpec", "UsedInStoryboardView", "UsedInStoryboardViewController", "UsedInXib")
+      expect(finder.swift_classes.count).to eq(11)
     end
   end
 
@@ -52,14 +52,26 @@ describe Fus::Finder do
     end
   end
 
-  describe "+obj_c_class_is_used_in_text" do
+  describe "+class_is_used_in_obj_c_text" do
     it "returns true if the classname appears" do
-      was_used = Fus::Finder.obj_c_class_is_used_in_text("Foo", "Foo")
+      was_used = Fus::Finder.class_is_used_in_obj_c_text("Foo", "Foo")
       expect(was_used).to be_truthy
     end
 
     it "returns false if the classname does not appear" do
-      was_used = Fus::Finder.obj_c_class_is_used_in_text("Foo", "Bar")
+      was_used = Fus::Finder.class_is_used_in_obj_c_text("Foo", "Bar")
+      expect(was_used).to be_falsy
+    end
+  end
+  
+  describe "+class_is_used_in_xml" do
+    it "returns true if the classname is used as a customClass" do
+      was_used = Fus::Finder.class_is_used_in_xml("Foo", '<customClass="Foo">')
+      expect(was_used).to be_truthy
+    end
+
+    it "returns false if the classname does not appear as a customClass" do
+      was_used = Fus::Finder.class_is_used_in_xml("Foo", "<Bar>")
       expect(was_used).to be_falsy
     end
   end

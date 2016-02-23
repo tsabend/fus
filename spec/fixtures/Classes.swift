@@ -1,23 +1,17 @@
-class Foo {
+class Foo {}
 
-}
+class ClassVar {}
 
-class ClassVar {
+class SuperFoo {}
 
-}
+class NoSpaceSuperFoo : SuperDuperFoo {}
 
-class SuperFoo {
+class ObjCH {}
 
-}
+class ObjCM {}
 
-class NoSpaceSuperFoo : SuperDuperFoo {
+class UsedInXib {}
 
-}
+class UsedInStoryboardViewController {}
 
-class ObjCH {
-
-}
-
-class ObjCM {
-
-}
+class UsedInStoryboardView {}
