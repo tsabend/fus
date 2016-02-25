@@ -83,7 +83,7 @@ module Fus
     end
     
     def self.class_is_spec(classname)
-      !!classname.match(/Spec$/)
+      classname.match(/Spec$/)
     end
   end
 end
