@@ -10,6 +10,8 @@ class ObjCH {}
 
 class ObjCM {}
 
+class ObjCHForwardDeclarationOnly {}
+
 class UsedInXib {}
 
 class UsedInStoryboardViewController {}

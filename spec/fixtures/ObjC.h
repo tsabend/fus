@@ -1,1 +1,2 @@
 ObjCH.here
+@ObjCHForwardDeclarationOnly

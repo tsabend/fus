@@ -7,16 +7,23 @@ describe Fus::Finder do
   describe "swift_classes" do
     it "returns all of the classes in all the swift paths" do
       finder = Fus::Finder.new(@fixtures_path)
-      expect(finder.swift_classes).to include("Foo", "ClassVar", "SuperFoo", "NoSpaceSuperFoo", "UnusedClass", "ObjCH", "ObjCM", "FooSpec", "UsedInStoryboardView", "UsedInStoryboardViewController", "UsedInXib")
-      expect(finder.swift_classes.count).to eq(11)
+      # Any time you add a swift class to the fixtures, update this spec
+      expect(finder.swift_classes).to include(
+        "Foo", "ClassVar", "SuperFoo", 
+        "NoSpaceSuperFoo", "UnusedClass", 
+        "ObjCH", "ObjCM", "FooSpec", 
+        "UsedInStoryboardView", "UsedInStoryboardViewController", 
+        "UsedInXib", "ObjCHForwardDeclarationOnly"
+      )
+      expect(finder.swift_classes.count).to eq(12)
     end
   end
 
   describe "unused_classes" do
     it "returns classes that are never used" do
       finder = Fus::Finder.new(@fixtures_path)
-      expect(finder.unused_classes).to include("UnusedClass")
-      expect(finder.unused_classes.count).to eq(1)
+      expect(finder.unused_classes).to include("UnusedClass", "ObjCHForwardDeclarationOnly")
+      expect(finder.unused_classes.count).to eq(2)
     end
   end
 
@@ -56,6 +63,16 @@ describe Fus::Finder do
     it "returns true if the classname appears" do
       was_used = Fus::Finder.class_is_used_in_obj_c_text("Foo", "Foo")
       expect(was_used).to be_truthy
+    end
+
+    it "returns true if the classname appears both as a forward declaration and not as a forward declaration" do
+      was_used = Fus::Finder.class_is_used_in_obj_c_text("Foo", "@Foo Foo")
+      expect(was_used).to be_truthy
+    end
+    
+    it "returns false if the classname appears only in a forward declaration" do
+      was_used = Fus::Finder.class_is_used_in_obj_c_text("Foo", "@Foo")
+      expect(was_used).to be_falsy
     end
 
     it "returns false if the classname does not appear" do

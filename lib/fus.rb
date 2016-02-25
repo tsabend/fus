@@ -75,7 +75,7 @@ module Fus
     end
 
     def self.class_is_used_in_obj_c_text(classname, text)
-      !text.scan(/#{classname}/).flatten.empty?
+      text.match(/(^|[^@])#{classname}/)
     end
   
     def self.class_is_used_in_xml(classname, xml)
