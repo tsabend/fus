@@ -41,7 +41,7 @@ module Fus
     private
 
     def find_all_swift_classes(swift_text)
-      swift_text.scan(/class\s+([^func][^var][a-zA-Z_]+)\s*:?.*\{/).flatten
+      swift_text.scan(/class\s+([^func][^var][a-zA-Z_]+)\s*:?\s[a-zA-Z_]*\b?\s*{/).flatten
     end
 
     def class_is_used_in_swift(classname, paths=swift_paths)
