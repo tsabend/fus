@@ -67,7 +67,7 @@ module Fus
     end
 
     def self.swift_class_is_used_in_text(classname, text)
-      text.match(/(\b#{classname}.?[.:(])|([:].?#{classname})/)
+      text.match(/(\b#{classname}.?[.:(])|([:].?#{classname})|(typealias\s+.*=.+#{classname})/)
     end
 
     def self.path_matches_classname(classname, path)

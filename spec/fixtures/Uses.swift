@@ -1,4 +1,5 @@
 
+typealias AliasFunc = TypeAliasClass -> TypeAliasClass
 Foo()
 ClassVar.prop
 SuperDuperFoo.perform()

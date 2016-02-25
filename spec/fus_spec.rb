@@ -13,9 +13,9 @@ describe Fus::Finder do
         "NoSpaceSuperFoo", "UnusedClass", 
         "ObjCH", "ObjCM", "FooSpec", 
         "UsedInStoryboardView", "UsedInStoryboardViewController", 
-        "UsedInXib", "ObjCHForwardDeclarationOnly"
+        "UsedInXib", "ObjCHForwardDeclarationOnly", "TypeAliasClass"
       )
-      expect(finder.swift_classes.count).to eq(12)
+      expect(finder.swift_classes.count).to eq(13)
     end
   end
 
@@ -50,6 +50,11 @@ describe Fus::Finder do
 
     it "returns true if a class func is used" do
       was_used = Fus::Finder.swift_class_is_used_in_text("Foo", "Foo.magic()")
+      expect(was_used).to be_truthy
+    end
+    
+    it "returns true if a class is used as a typealias" do
+      was_used = Fus::Finder.swift_class_is_used_in_text("Foo", "typealias Bar = Foo")
       expect(was_used).to be_truthy
     end
 

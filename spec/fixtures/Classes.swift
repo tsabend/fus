@@ -17,3 +17,5 @@ class UsedInXib {}
 class UsedInStoryboardViewController {}
 
 class UsedInStoryboardView {}
+
+class TypeAliasClass {}
