@@ -1,27 +1,23 @@
-# Fus
+# Fus: 
 
-Find unused Swift classes
+## Stop compiling things you don't use. 
+Fus is a command line tool for finding unused Swift classes in your project.
+
+This tool was inspired by [fui](https://github.com/dblock/fui)
 
 ## Installation
-
-Add this line to your application's Gemfile:
-
-```ruby
-gem 'fus'
-```
-
-And then execute:
-
-    $ bundle
-
-Or install it yourself as:
-
     $ gem install fus
 
 ## Usage
 
-TODO: Write usage instructions here
-
+```
+FUS commands:
+  fus find            # Find unused swift classes
+  fus list            # List all swift classes
+  
+Options:
+  -p, [--path=path]  # path in which to search (defaults to /Users/thomasabend/Desktop/Programming/fus)
+```
 ## Contributing
 
 1. Fork it ( https://github.com/[my-github-username]/fus/fork )
