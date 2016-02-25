@@ -11,13 +11,13 @@ class FusRunner < Thor
   desc "find", "Find unused swift classes"
   def find
     finder = Fus::Finder.new(path)
-    puts finder.unused_classes
+    puts finder.unused_classnames
   end
   
   desc "list", "List all swift classes"
   def list
     finder = Fus::Finder.new(path)
-    puts finder.swift_classes
+    puts finder.swift_classnames
   end
  
   def help
