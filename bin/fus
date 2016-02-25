@@ -1,6 +1,34 @@
 #!/usr/bin/env ruby
 
 require 'fus'
+require 'thor'
 
-finder = Fus::Finder.new(Dir.pwd)
-puts finder.unused_classes
+class FusRunner < Thor
+  package_name "FUS"
+  class_option :path, aliases: "-p", desc: "path in which to search (defaults to #{Dir.pwd})", banner: "path"
+  
+  default_task :find
+  desc "find", "Find unused swift classes"
+  def find
+    finder = Fus::Finder.new(path)
+    puts finder.unused_classes
+  end
+  
+  desc "list", "List all swift classes"
+  def list
+    finder = Fus::Finder.new(path)
+    puts finder.swift_classes
+  end
+ 
+  def help
+    say("\nFind Unused Swift Classes\n\n")
+    super
+  end
+ 
+  private 
+  def path
+    options[:path] || Dir.pwd
+  end
+end
+
+FusRunner.start(ARGV)
