@@ -19,3 +19,5 @@ class UsedInStoryboardViewController {}
 class UsedInStoryboardView {}
 
 class TypeAliasClass {}
+
+class AssociatedTypeClass {}
