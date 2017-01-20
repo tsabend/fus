@@ -6,7 +6,9 @@ module Fus
     def initialize(path)
       raise Errno::ENOENT.new(path) unless Dir.exists?(path)
       path = File.expand_path(path)
-      @swift_paths = Dir.glob("#{path}/**/*.swift")
+      @swift_paths = Dir
+          .glob("#{path}/**/*.swift")
+          .select {|path| path.scan(/\/Pods\//).empty? }
       @obj_c_paths = Dir.glob("#{path}/**/*.m") + Dir.glob("#{path}/**/*.h")
         .select {|path| path.scan(/-Swift.h/).empty? }
       @ib_paths = (Dir.glob("#{path}/**/*.xib") + 
