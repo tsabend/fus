@@ -12,11 +12,11 @@ describe Fus::Finder do
       expect(swift_classnames).to include(
         "Foo", "ClassVar", "SuperFoo", 
         "NoSpaceSuperFoo", "UnusedClass", 
-        "ObjCH", "ObjCM", "FooSpec", 
+        "ObjCH", "ObjCM", "FooSpec", "FooTest", "FooTests",
         "UsedInStoryboardView", "UsedInStoryboardViewController", 
         "UsedInXib", "ObjCHForwardDeclarationOnly", "TypeAliasClass", "AssociatedTypeClass"
       )
-      expect(swift_classnames.count).to eq(14)
+      expect(swift_classnames.count).to eq(16)
     end
   end
 
