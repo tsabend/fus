@@ -6,7 +6,7 @@ module Fus
     end
     
     def spec?
-      name.match(/Spec/)
+      name.match(/Spec|Tests|Test/)
     end
     
     def matches_classname?(path)

@@ -6,8 +6,18 @@ describe Fus::SwiftClass do
       spec = Fus::SwiftClass.new("FooSpec")
       expect(spec.spec?).to be_truthy
     end
+    
+    it "returns true if the classname ends in Test" do
+      spec = Fus::SwiftClass.new("FooTest")
+      expect(spec.spec?).to be_truthy
+    end
+    
+    it "returns true if the classname ends in Tests" do
+      spec = Fus::SwiftClass.new("FooTests")
+      expect(spec.spec?).to be_truthy
+    end
 
-    it "returns false if the classname doesn't end in Spec" do
+    it "returns false if the classname doesn't end in Spec, Test or Tests" do
       not_spec = Fus::SwiftClass.new("FooBar")
       expect(not_spec.spec?).to be_falsy
     end
