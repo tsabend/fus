@@ -14,9 +14,9 @@ describe Fus::Finder do
         "NoSpaceSuperFoo", "UnusedClass", 
         "ObjCH", "ObjCM", "FooSpec", 
         "UsedInStoryboardView", "UsedInStoryboardViewController", 
-        "UsedInXib", "ObjCHForwardDeclarationOnly", "TypeAliasClass"
+        "UsedInXib", "ObjCHForwardDeclarationOnly", "TypeAliasClass", "AssociatedTypeClass"
       )
-      expect(swift_classnames.count).to eq(13)
+      expect(swift_classnames.count).to eq(14)
     end
   end
 

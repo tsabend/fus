@@ -22,7 +22,7 @@ module Fus
     end
     
     def used_in_swift?(text)
-      text.match(/(\b#{name}.?[.:(])|([:].?#{name})|(typealias\s+.*=.+#{name})/)
+      text.match(/(\b#{name}.?[.:(])|([:].?#{name})|((typealias|associatedType)\s+.*=.+#{name})/)
     end
   end
 end
