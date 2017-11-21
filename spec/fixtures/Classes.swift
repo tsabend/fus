@@ -21,3 +21,6 @@ class UsedInStoryboardView {}
 class TypeAliasClass {}
 
 class AssociatedTypeClass {}
+class GenericClass<T> {}
+
+class ClassWithGenericParent: GenericParent<Void> { }
