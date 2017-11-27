@@ -10,13 +10,15 @@ describe Fus::Finder do
       # Any time you add a swift class to the fixtures, update this spec
       swift_classnames = finder.swift_classnames
       expect(swift_classnames).to include(
-        "Foo", "ClassVar", "SuperFoo", 
-        "NoSpaceSuperFoo", "UnusedClass", 
+        "Foo", "ClassVar", "SuperFoo",
+        "NoSpaceSuperFoo", "UnusedClass",
         "ObjCH", "ObjCM", "FooSpec", "FooTest", "FooTests",
-        "UsedInStoryboardView", "UsedInStoryboardViewController", 
-        "UsedInXib", "ObjCHForwardDeclarationOnly", "TypeAliasClass", "AssociatedTypeClass"
+        "UsedInStoryboardView", "UsedInStoryboardViewController",
+        "UsedInXib", "ObjCHForwardDeclarationOnly", "TypeAliasClass", "AssociatedTypeClass",
+        "GenericClass", "ClassWithGenericParent", "UnusedGenericClass", "UnusedClassWithGenericParent",
+        "UnusedGenericClass", "UnusedGenericClassWithConstraint"
       )
-      expect(swift_classnames.count).to eq(16)
+      expect(swift_classnames.count).to eq(22)
     end
   end
 
@@ -24,8 +26,8 @@ describe Fus::Finder do
     it "returns classes that are never used" do
       finder = Fus::Finder.new(@fixtures_path)
       unused_classnames = finder.unused_classnames
-      expect(unused_classnames).to include("UnusedClass", "ObjCHForwardDeclarationOnly")
-      expect(unused_classnames.count).to eq(2)
+      expect(unused_classnames).to include("UnusedClass", "ObjCHForwardDeclarationOnly", "UnusedGenericClass", "UnusedGenericClass", "UnusedClassWithGenericParent", "UnusedGenericClassWithConstraint")
+      expect(unused_classnames.count).to eq(6)
     end
   end
 end

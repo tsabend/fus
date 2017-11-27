@@ -3,7 +3,7 @@ module Fus
   class SwiftClass
     attr_reader :name
     def initialize(name)
-      @name = name
+      @name = name.sub(/<.+>/, "")
     end
     
     # Is this class a test class
@@ -28,7 +28,7 @@ module Fus
     
     # Is this class used in this Swift text
     def used_in_swift?(text)
-      text.match(/(\b#{name}.?[.:(])|([:].?#{name})|((typealias|associatedType)\s+.*=.+#{name})/)
+      text.match(/(\b#{name}(<.+>)?.?[.(])|([:].?#{name})|((typealias|associatedType)\s+.*=.+#{name})/)
     end
   end
 end
