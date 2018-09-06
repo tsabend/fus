@@ -1,0 +1,3 @@
+struct UsedValueType {}
+
+struct UnusedValuetype {}

@@ -16,9 +16,9 @@ describe Fus::Finder do
         "UsedInStoryboardView", "UsedInStoryboardViewController",
         "UsedInXib", "ObjCHForwardDeclarationOnly", "TypeAliasClass", "AssociatedTypeClass",
         "GenericClass", "ClassWithGenericParent", "UnusedGenericClass", "UnusedClassWithGenericParent",
-        "UnusedGenericClass", "UnusedGenericClassWithConstraint"
+        "UnusedGenericClass", "UnusedGenericClassWithConstraint", "UsedValueType", "UnusedValuetype"
       )
-      expect(swift_classnames.count).to eq(22)
+      expect(swift_classnames.count).to eq(24)
     end
   end
 
@@ -26,8 +26,8 @@ describe Fus::Finder do
     it "returns classes that are never used" do
       finder = Fus::Finder.new(@fixtures_path)
       unused_classnames = finder.unused_classnames
-      expect(unused_classnames).to include("UnusedClass", "ObjCHForwardDeclarationOnly", "UnusedGenericClass", "UnusedGenericClass", "UnusedClassWithGenericParent", "UnusedGenericClassWithConstraint")
-      expect(unused_classnames.count).to eq(6)
+      expect(unused_classnames).to include("UnusedClass", "ObjCHForwardDeclarationOnly", "UnusedGenericClass", "UnusedGenericClass", "UnusedClassWithGenericParent", "UnusedGenericClassWithConstraint", "UnusedValuetype")
+      expect(unused_classnames.count).to eq(7)
     end
   end
 end
