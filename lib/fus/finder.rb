@@ -52,7 +52,7 @@ module Fus
     # Given some text, identify Swift classes
     def find(swift_text)
       swift_text
-        .scan(/class\s+([^func][^var][a-zA-Z_]+)(?:<.+>)?\s*:?\s[a-zA-Z_<>]*\b?\s*{/)
+        .scan(/(?:class|struct)\s+([a-zA-Z_]+)(?:<.+>)?\s*:?\s[a-zA-Z_<>]*\b?\s*{/)
         .flatten
     end
 
