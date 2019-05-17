@@ -28,7 +28,7 @@ module Fus
     
     # Is this class used in this Swift text
     def used_in_swift?(text)
-      text.match(/(\b#{name}(<.+>)?.?[.(])|([:].?#{name})|((typealias|associatedtype)\s+.*=.+#{name})/)
+      text.match(/(\b#{name}(<.+>)?.?[.(])|([:].?#{name})|((typealias|associatedtype)\s+.*=.+#{name})|((class|struct)\s+.*:\s*.*\s*<#{name}>)/)
     end
   end
 end

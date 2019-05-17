@@ -209,4 +209,13 @@ describe Fus::SwiftClass do
     end
 
   end
+
+  describe "used_in_swift?(text) for an associated type of a generic class" do
+    before { @swift_class = Fus::SwiftClass.new("Foo") }
+
+    it "returns true if the class is used as an associated type of a generic class" do
+      was_used = @swift_class.used_in_swift?("class FooBar: Bar<Foo>")
+      expect(was_used).to be_truthy
+    end
+  end
 end
