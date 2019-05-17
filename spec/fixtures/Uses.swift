@@ -1,6 +1,6 @@
 
 typealias AliasFunc = TypeAliasClass -> TypeAliasClass
-associatedType ProtocolAliasType = AssociatedTypeClass
+associatedtype ProtocolAliasType = AssociatedTypeClass
 Foo()
 ClassVar.prop
 SuperDuperFoo.perform()

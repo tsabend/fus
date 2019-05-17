@@ -131,7 +131,7 @@ describe Fus::SwiftClass do
     end
     
     it "returns true if a class is used as a typealias in a protocol" do
-      was_used = @swift_class.used_in_swift?("associatedType Bar = Foo")
+      was_used = @swift_class.used_in_swift?("associatedtype Bar = Foo")
       expect(was_used).to be_truthy
     end
 
@@ -199,7 +199,7 @@ describe Fus::SwiftClass do
     end
 
     it "returns true if a class is used as a typealias in a protocol" do
-      was_used = @swift_class.used_in_swift?("associatedType Bar = Foo")
+      was_used = @swift_class.used_in_swift?("associatedtype Bar = Foo")
       expect(was_used).to be_truthy
     end
 
